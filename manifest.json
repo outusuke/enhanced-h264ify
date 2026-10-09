@@ -1,6 +1,6 @@
 {
   "name": "enhanced-h264ify",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "manifest_version": 3,
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/alextrv/enhanced-h264ify",
@@ -26,28 +26,45 @@
         "*://*.youtu.be/*"
       ],
       "js": [
-        "src/content_script.js"
+        "src/main_world.js"
       ],
       "run_at": "document_start",
-      "all_frames": true
-    }
-  ],
-  "web_accessible_resources": [
+      "all_frames": true,
+      "world": "MAIN"
+    },
     {
       "matches": [
         "*://*.youtube.com/*",
         "*://*.youtube-nocookie.com/*",
         "*://*.youtu.be/*"
       ],
-      "resources": [
-        "src/inject/inject_codec_check.js",
-        "src/inject/inject_ln.js"
-      ]
+      "js": [
+        "src/defaults.js",
+        "src/content_script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube-nocookie.com/*",
+        "*://*.youtu.be/*"
+      ],
+      "js": [
+        "src/defaults.js",
+        "src/volume.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
     }
   ],
   "default_locale": "en",
   "options_ui": {
     "page": "options.html"
   },
-  "permissions": [ "storage" ]
+  "permissions": [
+    "storage"
+  ],
+  "minimum_chrome_version": "111"
 }
